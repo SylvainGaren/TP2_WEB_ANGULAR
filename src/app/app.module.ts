@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { FooterComponent } from './footer/footer.component';
 import { TetiereComponent } from './tetiere/tetiere.component';
 import { PhoneFormatPipe } from './format.pipe';
+import { PhoneDirectiveDirective } from './phone-directive.directive';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { PhoneFormatPipe } from './format.pipe';
     DataRecapComponent,
     FooterComponent,
     TetiereComponent,
-    PhoneFormatPipe
+    PhoneFormatPipe,
+    PhoneDirectiveDirective
   ],
   imports: [
     BrowserModule,

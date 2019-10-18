@@ -21,6 +21,7 @@ export class FormComponent implements OnInit {
   numeroTel: string;
   validChangeVal: boolean = false;
   valPays: string;
+  Tel: string = "";
 
   constructor() { }
 
@@ -208,6 +209,22 @@ export class FormComponent implements OnInit {
 
   resetUserForm(userForm: NgForm) {
     userForm.resetForm();
+  }
+
+  verifyTel(): boolean {
+    var phoneNumber = /[0-9-()+]{3,20}/;
+    var valid = false;
+    
+    console.log(this.Tel);
+    if (this.Tel != "") {
+      if (this.Tel.match(phoneNumber)) {
+        valid = true;
+      }
+    }
+    else {
+      valid = false;
+    }
+    return valid;
   }
 
 }
