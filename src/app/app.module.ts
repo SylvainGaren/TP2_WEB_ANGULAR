@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormComponent } from './form/form.component';
 import { DataRecapComponent } from './data-recap/data-recap.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from './footer/footer.component';
 import { TetiereComponent } from './tetiere/tetiere.component';
 import { PhoneFormatPipe } from './format.pipe';
@@ -24,7 +24,8 @@ import { PhoneDirectiveDirective } from './phone-directive.directive';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

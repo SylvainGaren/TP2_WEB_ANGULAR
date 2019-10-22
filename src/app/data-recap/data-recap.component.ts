@@ -6,9 +6,6 @@ import { Component, OnInit, Input, Output, EventEmitter, Pipe, PipeTransform } f
   styleUrls: ['./data-recap.component.scss']
 })
 
-// Essaie de mise en place d'un pipe
-@Pipe({name: 'format'})
-
 export class DataRecapComponent implements OnInit {
 
   // instructions input pour pouvoir recevoir des informations du père (composant form)
@@ -20,10 +17,6 @@ export class DataRecapComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-  }
-
-  transform(value: string) {
-    return "+33" + value;
   }
 
 }

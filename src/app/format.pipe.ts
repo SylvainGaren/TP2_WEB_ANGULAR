@@ -21,6 +21,9 @@ export class PhoneFormatPipe implements PipeTransform {
                     return "+55" + tel;
                 }
             }
+            else {
+                return tel;
+            }
         }
     }
 }

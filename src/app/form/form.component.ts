@@ -1,5 +1,5 @@
 import { Component, OnInit, Output } from '@angular/core';
-import { NgForm, FormArray } from '@angular/forms';
+import { NgForm, FormArray, FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EventEmitter } from '@angular/core';
 
 @Component({
@@ -15,6 +15,112 @@ export class FormComponent implements OnInit {
   @Output() validChange: EventEmitter<boolean> = new EventEmitter<boolean>(); // evenement qui permettra d'afficher ou non les informations saisies par l'utilisateur dans un récap
   @Output() valPaysFather: EventEmitter<string> = new EventEmitter<string>(); // evenement qui permettra d'envoyer la valeur du pays saisie par l'utilisateur
 
+  registerForm: FormGroup;
+  submitted = false;
+  recap: string;
+  validChangeVal: boolean = false;
+  numeroTel: string;
+  valPays: string;
+  errorMessage: string = "Quelques erreurs de saisies :";
+
+  constructor(private formBuilder: FormBuilder) { }
+
+  ngOnInit() {
+    this.registerForm = this.formBuilder.group({
+      Name: ['', Validators.required],
+      Prenom: ['', Validators.required],
+      Adresse: ['', Validators.required],
+      Cp: ['', [Validators.required, Validators.minLength(5)]],
+      Ville: ['', Validators.required],
+      Tel: ['', Validators.required],
+      Email: ['', [Validators.required, Validators.email]],
+      Civilite: ['', Validators.required],
+      Login: ['', Validators.required],
+      Pwd: ['', [Validators.required, Validators.minLength(8)]],
+      ConfirmPass: ['', Validators.required],
+      pays: ['', Validators.required]
+    });
+  }
+
+  get form() {
+    return this.registerForm.controls;
+  }
+
+  onSubmit() {
+    var tel = this.verifyTel();
+    var pwd = this.checkPassword();
+    console.log(pwd);
+
+    // si formulaire invalide
+    if (this.registerForm.invalid) {
+      alert('Formulaire invalide');
+      return;
+    }
+    else if (!tel || !pwd) {
+      console.log("tel ou mdr pas bon");
+      this.errorMessage = "Il y a un probleme dans le mot de passe ou le numéro de téléphone";
+      this.change.emit(this.recap);
+    }
+    else {
+      alert('SUCCESS');
+      this.submitted = true;
+      this.recap = "Nom : " + this.registerForm.value.Name + ", prenom : " + this.registerForm.value.Prenom + ", adresse : " + this.registerForm.value.Adresse + ", cp : " + this.registerForm.value.Cp + ", login : " + this.registerForm.value.Login + ", email : " + this.registerForm.value.Email;
+      this.change.emit(this.recap);
+      this.numeroTel = this.registerForm.value.Tel;
+      this.telNumber.emit(this.numeroTel);
+      this.validChangeVal = true;
+      this.validChange.emit(this.validChangeVal);
+      this.valPays = this.registerForm.value.pays;
+      this.valPaysFather.emit(this.valPays);
+    }
+  }
+
+  resetUserForm(userForm: NgForm) {
+    userForm.resetForm();
+  }
+
+  verifyTel(): boolean {
+    var phoneNumber = /[0-9-()+]{3,20}/;
+    var valid = false;
+    var phone = this.registerForm.value.Tel;
+    
+    if (phone != "") {
+      if (phone.match(phoneNumber)) {
+        valid = true;
+      }
+    }
+    else {
+      valid = false;
+    }
+    return valid;
+  }
+
+  // ma fonction qui vérifie le champ password
+  checkPassword() {
+    var pass = this.registerForm.value.Pwd;
+    var confirmPass = this.registerForm.value.ConfirmPass;
+    let valid = false;
+    if (pass.length >= 8) {
+      if (pass != "" && pass == confirmPass) {
+        valid = true;
+      }
+      else {
+        valid = false;
+      }
+    }
+    else {
+      valid = false;
+    }
+    return valid;
+  }
+}
+/*
+  // Valeurs en OUTPUT pour envoyer des informations au fils qui les récupérera dans un INPUT
+  @Output() change: EventEmitter<string> = new EventEmitter<string>();  // evenement qui permettra d'envoyer les informations remplies par l'utilisateur (ormis le téléphone)
+  @Output() telNumber: EventEmitter<string> = new EventEmitter<string>(); // evenement qui permettra d'envoyer le numéro de téléphone
+  @Output() validChange: EventEmitter<boolean> = new EventEmitter<boolean>(); // evenement qui permettra d'afficher ou non les informations saisies par l'utilisateur dans un récap
+  @Output() valPaysFather: EventEmitter<string> = new EventEmitter<string>(); // evenement qui permettra d'envoyer la valeur du pays saisie par l'utilisateur
+
   recap: string;  // valeur récapitulative des données saisies par l'utilisateur
   valid: boolean = false;
   errorMessage: string = "Quelques erreurs de saisies :";
@@ -23,10 +129,7 @@ export class FormComponent implements OnInit {
   valPays: string;
   Tel: string = "";
 
-  constructor() { }
 
-  ngOnInit() {
-  }
 
   onFormSubmit(userForm:NgForm) {
     // valeurs booléennes pour chacun des champs pour valider ou non la saisie d'informations par l'utilisateur
@@ -227,4 +330,4 @@ export class FormComponent implements OnInit {
     return valid;
   }
 
-}
+}*/
