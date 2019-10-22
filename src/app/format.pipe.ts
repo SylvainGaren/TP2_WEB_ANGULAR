@@ -22,7 +22,7 @@ export class PhoneFormatPipe implements PipeTransform {
                 }
             }
             else {
-                return tel;
+              return tel;
             }
         }
     }

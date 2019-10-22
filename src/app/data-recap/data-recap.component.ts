@@ -18,5 +18,4 @@ export class DataRecapComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }
