@@ -10,6 +10,8 @@ import { FooterComponent } from './footer/footer.component';
 import { TetiereComponent } from './tetiere/tetiere.component';
 import { PhoneFormatPipe } from './format.pipe';
 import { PhoneDirectiveDirective } from './phone-directive.directive';
+import { ListProductComponent } from './list-product/list-product.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -19,13 +21,15 @@ import { PhoneDirectiveDirective } from './phone-directive.directive';
     FooterComponent,
     TetiereComponent,
     PhoneFormatPipe,
-    PhoneDirectiveDirective
+    PhoneDirectiveDirective,
+    ListProductComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
