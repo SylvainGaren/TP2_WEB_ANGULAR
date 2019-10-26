@@ -2,6 +2,4 @@
 
 <p *ngFor="let product of products | async">{{ product.author }} - {{ product.productName }} - {{ product.description }}</p>
 <br>
-<br>
-<input class="search" type="text" placeholder="Search.." name="search">
-<button type="submit" class="fa fa-search" (click)="affiche()">Search</button>
+<app-filter></app-filter>

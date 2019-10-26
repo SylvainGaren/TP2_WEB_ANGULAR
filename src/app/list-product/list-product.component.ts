@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiListService } from '../api-list.service';
-import { Observable } from 'rxjs';
+import { Observable, from, of } from 'rxjs';
 import { Product } from '../model/products';
 
 @Component({
@@ -17,9 +17,4 @@ export class ListProductComponent implements OnInit {
   ngOnInit() {
     this.products = this.apiService.getProducts();
   }
-
-  affiche() {
-    this.apiService.filter();
-  }
-
 }

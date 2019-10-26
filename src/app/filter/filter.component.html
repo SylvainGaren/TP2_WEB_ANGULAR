@@ -1,0 +1,7 @@
+<p>filter works!</p>
+
+<input class="search" type="text" placeholder="Search.." name="search" [(ngModel)]="search">
+<p>Cherchez par nom d'auteur (Google, Cola, Dragonica France, Microsoft, Riot, Adrimix)</p>
+<button type="submit" class="fa fa-search" (click)="affiche()">Search</button>
+<br>
+<p *ngFor="let product of res">{{ product.author }} - {{ product.productName }} - {{ product.description }}</p>

@@ -12,6 +12,7 @@ import { PhoneFormatPipe } from './format.pipe';
 import { PhoneDirectiveDirective } from './phone-directive.directive';
 import { ListProductComponent } from './list-product/list-product.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FilterComponent } from './filter/filter.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
     TetiereComponent,
     PhoneFormatPipe,
     PhoneDirectiveDirective,
-    ListProductComponent
+    ListProductComponent,
+    FilterComponent
   ],
   imports: [
     BrowserModule,
