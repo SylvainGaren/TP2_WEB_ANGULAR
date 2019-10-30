@@ -13,6 +13,14 @@ import { PhoneDirectiveDirective } from './phone-directive.directive';
 import { ListProductComponent } from './list-product/list-product.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FilterComponent } from './filter/filter.component';
+import { RouterModule, Routes } from '@angular/router';
+import { PanierComponent } from './panier/panier.component';
+import { NgxsModule } from '@ngxs/store';
+
+const appRoutes: Routes = [
+  { path: 'signin', component: FormComponent },
+  { path: 'auth', component: DataRecapComponent },
+  ];
 
 @NgModule({
   declarations: [
@@ -24,14 +32,17 @@ import { FilterComponent } from './filter/filter.component';
     PhoneFormatPipe,
     PhoneDirectiveDirective,
     ListProductComponent,
-    FilterComponent
+    FilterComponent,
+    PanierComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forRoot(appRoutes),
+    NgxsModule.forRoot ()
   ],
   providers: [],
   bootstrap: [AppComponent]
