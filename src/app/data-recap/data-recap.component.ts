@@ -1,4 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, Pipe, PipeTransform } from '@angular/core';
+import { Store } from '@ngxs/store';
+import { User } from '../model/user';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-data-recap',
@@ -8,13 +11,11 @@ import { Component, OnInit, Input, Output, EventEmitter, Pipe, PipeTransform } f
 
 export class DataRecapComponent implements OnInit {
 
-  // instructions input pour pouvoir recevoir des informations du père (composant form)
-  @Input() recapForm: string;
-  @Input() tel: string;
-  @Input() validSaisie: boolean;
-  @Input() pays: string;
+  users: Observable<User>;
 
-  constructor() { }
+  constructor(private store: Store) {
+    this.users = this.store.select(state => state.users.users);
+   }
 
   ngOnInit() {
   }

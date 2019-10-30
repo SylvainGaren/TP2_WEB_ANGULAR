@@ -1,6 +1,8 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { NgForm, FormArray, FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { EventEmitter } from '@angular/core';
+import { AddRecap } from '../actions/addRecap-action';
+import { Store } from '@ngxs/store';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form',
@@ -8,12 +10,6 @@ import { EventEmitter } from '@angular/core';
   styleUrls: ['./form.component.scss']
 })
 export class FormComponent implements OnInit {
-
-  // Valeurs en OUTPUT pour envoyer des informations au fils qui les récupérera dans un INPUT
-  @Output() change: EventEmitter<string> = new EventEmitter<string>();  // evenement qui permettra d'envoyer les informations remplies par l'utilisateur (ormis le téléphone)
-  @Output() telNumber: EventEmitter<string> = new EventEmitter<string>(); // evenement qui permettra d'envoyer le numéro de téléphone
-  @Output() validChange: EventEmitter<boolean> = new EventEmitter<boolean>(); // evenement qui permettra d'afficher ou non les informations saisies par l'utilisateur dans un récap
-  @Output() valPaysFather: EventEmitter<string> = new EventEmitter<string>(); // evenement qui permettra d'envoyer la valeur du pays saisie par l'utilisateur
 
   registerForm: FormGroup;
   submitted = false;
@@ -23,7 +19,18 @@ export class FormComponent implements OnInit {
   valPays: string;
   errorMessage: string = "Quelques erreurs de saisies :";
 
-  constructor(private formBuilder: FormBuilder) { }
+  Name: string;
+  Prenom: string;
+  Adresse: string;
+  Cp: string;
+  Ville: string;
+  Tel: string;
+  Email: string;
+  Civilite: string;
+  Login: string;
+  pays: string;
+
+  constructor(private formBuilder: FormBuilder, private store : Store, private router: Router) { }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
@@ -40,6 +47,7 @@ export class FormComponent implements OnInit {
       ConfirmPass: ['', Validators.required],
       pays: ['', Validators.required]
     });
+    
   }
 
   get form() {
@@ -49,7 +57,6 @@ export class FormComponent implements OnInit {
   onSubmit() {
     var tel = this.verifyTel();
     var pwd = this.checkPassword();
-    console.log(pwd);
 
     // si formulaire invalide
     if (this.registerForm.invalid) {
@@ -59,20 +66,18 @@ export class FormComponent implements OnInit {
     else if (!tel || !pwd) {
       console.log("tel ou mdr pas bon");
       this.errorMessage = "Il y a un probleme dans le mot de passe ou le numéro de téléphone";
-      this.change.emit(this.recap);
     }
     else {
       alert('SUCCESS');
       this.submitted = true;
-      this.recap = "Nom : " + this.registerForm.value.Name + ", prenom : " + this.registerForm.value.Prenom + ", adresse : " + this.registerForm.value.Adresse + ", cp : " + this.registerForm.value.Cp + ", login : " + this.registerForm.value.Login + ", email : " + this.registerForm.value.Email;
-      this.change.emit(this.recap);
-      this.numeroTel = this.registerForm.value.Tel;
-      this.telNumber.emit(this.numeroTel);
-      this.validChangeVal = true;
-      this.validChange.emit(this.validChangeVal);
-      this.valPays = this.registerForm.value.pays;
-      this.valPaysFather.emit(this.valPays);
+        
+      this.addRecap (this.registerForm.value.Name, this.registerForm.value.Prenom, this.registerForm.value.Adresse, this.registerForm.value.Cp, this.registerForm.value.Ville, this.registerForm.value.Tel, this.registerForm.value.Email, this.registerForm.value.Civilite, this.registerForm.value.Login, this.registerForm.value.pays);
+      this.router.navigate(['/auth']);
     }
+  }
+
+  addRecap(nom: string, prenom: string, adresse: string, cp: string, ville: string, tel: string, email: string, civilite: string, identifiant: string, pays: string) { 
+    this.store.dispatch(new AddRecap({ nom, prenom, adresse, cp, ville, tel, email, civilite, identifiant, pays })); 
   }
 
   resetUserForm(userForm: NgForm) {

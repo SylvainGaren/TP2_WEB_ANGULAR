@@ -1,5 +1,22 @@
-<p>list-product works!</p>
+    <h2>Catalogue de produits</h2>
+    
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Author</th>
+            <th>Product name</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let product of products | async">
+            <td>{{ product.author }}</td>
+            <td>{{ product.productName }}</td>
+            <td>{{ product.description }}</td>
+        </tr>
+        </tbody>
+    </table>
 
-<p *ngFor="let product of products | async">{{ product.author }} - {{ product.productName }} - {{ product.description }}</p>
-<br>
 <app-filter></app-filter>
+
+

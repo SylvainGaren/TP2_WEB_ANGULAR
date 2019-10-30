@@ -16,10 +16,12 @@ import { FilterComponent } from './filter/filter.component';
 import { RouterModule, Routes } from '@angular/router';
 import { PanierComponent } from './panier/panier.component';
 import { NgxsModule } from '@ngxs/store';
+import { UserState } from './state/user-state';
 
 const appRoutes: Routes = [
   { path: 'signin', component: FormComponent },
   { path: 'auth', component: DataRecapComponent },
+  { path: 'cat', component: ListProductComponent },
   ];
 
 @NgModule({
@@ -42,7 +44,7 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
-    NgxsModule.forRoot ()
+    NgxsModule.forRoot ([UserState])
   ],
   providers: [],
   bootstrap: [AppComponent]

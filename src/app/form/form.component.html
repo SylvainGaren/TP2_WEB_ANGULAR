@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-md-6 offset-md-3">
                 <!-- Le formulaire sera lié en action avec un bouton submit qui enclenchera la fonction onFormSubmit en lui envoyant les informations remplies par l'utilisateur -->
-                <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <form [formGroup]="registerForm">
                     <div class="form-group">
                         <label>Nom :</label>
                         <input type="text" formControlName="Name" id="Name" class="form-control">
@@ -78,14 +78,14 @@
 
                     <div class="form-group">
                         <br>
-                        <button class="btn btn-primary" [routerLink]="['/auth']">Submit</button>
+                        <button type="button" class="btn btn-primary" [routerLink]="['/auth']" (click)="onSubmit()">Submit</button>
                         <button type="button" class="btn btn-danger" (click)="resetUserForm(userForm)">Reset</button>
                     </div>
                 </form>
                 <!-- composant fils qui va récapituler toutes les données, envoie des informations à celui-ci, valeurs en OUTPUT -->
-                <div>
+                <!--<div>
                     <app-data-recap [recapForm]="recap" [tel]="numeroTel" [pays]="valPays" [validSaisie]="validChangeVal"></app-data-recap>
-                </div>
+                </div>-->
                 <!-- Directive structurelle, afficher si besoin un message d'erreur dans le cas d'erreurs de saisies -->
                 <div *ngIf="valid">{{ errorMessage }}</div>
         </div>

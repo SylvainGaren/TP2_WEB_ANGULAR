@@ -1,4 +1,12 @@
 export interface User {
-    name: string;
-    ref: string;
+    nom: string;
+    prenom: string;
+    adresse: string;
+    cp: string;
+    ville: string;
+    tel: string;
+    email: string;
+    civilite: string;
+    identifiant: string;
+    pays: string;
 }
