@@ -16,7 +16,7 @@
         </div>
         <ul class="nav navbar-nav">
         <li class="inactive"><a [routerLink]="['/cat']">Shop</a></li>
-        <li class="inactive"><a href="#">Panier</a></li>
+        <li class="inactive"><a [routerLink]="['/panier']">Panier</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
         <li><span class="glyphicon glyphicon-user"></span> Sign Up</li>
@@ -25,7 +25,7 @@
     </div>
     </nav>
 
-    <h1>Bienvenue au TP d'angular</h1>
+    <h1>Bienvenue au TP d'angular, nombres de produits : {{nbProduits}}</h1>
 
 
 </body>

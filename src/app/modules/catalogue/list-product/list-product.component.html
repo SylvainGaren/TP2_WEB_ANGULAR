@@ -13,6 +13,8 @@
             <td>{{ product.author }}</td>
             <td>{{ product.productName }}</td>
             <td>{{ product.description }}</td>
+            <button type="button" class="btn btn-primary" (click)="ajoutPanier(product)">Panier</button>
+            <button [routerLink]="['/cat/detail', product.id]" type="button" class="btn btn-primary">Detail</button>
         </tr>
         </tbody>
     </table>

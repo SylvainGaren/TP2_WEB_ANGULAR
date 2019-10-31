@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, from } from 'rxjs';
 import { Product } from './model/products';
 import { environment } from '../environments/environment';
+import { filter, map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,10 @@ export class ApiListService {
 
   public getProducts() : Observable<Product[]> {
     return this.http.get<Product[]>(environment.backendProduct);
+  }
+
+  public getProductById(id: number): Observable<Product[]> {
+    return this.http.get<Product[]>(environment.backendProduct).pipe(map(p => p.filter(p=>p.id == id)));
   }
 
   public filter() {

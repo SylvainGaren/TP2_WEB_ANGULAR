@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter, Pipe, PipeTransform } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { User } from '../model/user';
+import { User } from '../../../model/user';
 import { Observable } from 'rxjs';
 
 @Component({

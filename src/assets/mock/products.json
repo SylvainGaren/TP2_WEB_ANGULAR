@@ -1,30 +1,36 @@
 [
     {
+        "id": 0,
         "author": "Google",
         "productName": "Angular",
         "description": "A super web language"
     },
     {
+        "id": 1,
         "author": "Cola",
         "productName": "Coca Cola",
         "description": "Have a sweet drink"
     },
     {
+        "id": 2,
         "author": "Dragonica France",
         "productName": "Dragonica",
         "description": "MMO Silversr"
     },
     {
+        "id": 3,
         "author": "Microsoft",
         "productName": "Skype",
         "description": "Chat with your friends"
     },
     {
+        "id": 4,
         "author": "RIOT",
         "productName": "League of Legend",
         "description": "Best game of the world"
     },
     {
+        "id": 5,
         "author": "Adrimix",
         "productName": "Rush Anubis",
         "description": "Rush value is 40k"

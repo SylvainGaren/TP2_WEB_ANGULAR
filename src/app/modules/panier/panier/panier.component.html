@@ -1,0 +1,19 @@
+<h2>Panier de produits</h2>
+    
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Author</th>
+        <th>Product name</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let product of products | async; let index = index">
+        <td>{{ product.author }}</td>
+        <td>{{ product.productName }}</td>
+        <td>{{ product.description }}</td>
+        <button type="button" class="btn btn-primary" (click)="supprimerPanier(index)">Supprimer</button>
+    </tr>
+    </tbody>
+</table>
