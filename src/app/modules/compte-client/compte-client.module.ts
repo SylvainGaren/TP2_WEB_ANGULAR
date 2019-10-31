@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CompteClientComponentRoutingModule } from './compte-client-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { DataRecapComponent } from './data-recap/data-recap.component';
-import { PhoneFormatPipe } from 'src/app/format.pipe';
+import { PhoneFormatPipe } from '../../format.pipe';
 
 @NgModule({
   declarations: [
