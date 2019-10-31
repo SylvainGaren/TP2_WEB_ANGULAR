@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Product } from '../../model/products';
-import { ApiListService } from '../../api-list.service';
+import { Product } from '../../../model/products';
+import { ApiListService } from '../../../api-list.service';
 
 @Component({
   selector: 'app-details',
