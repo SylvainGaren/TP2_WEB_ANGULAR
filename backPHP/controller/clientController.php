@@ -7,6 +7,7 @@ class Client {
 
     function addClient($request,$response,$args) {
 
+        $s_file = 'ressource/data.json';
         $body = $request->getParsedBody(); // Parse le body
         $id = $body['id']; // Data du formulaire
         $nom = $body['nom']; // Data du formulaire
@@ -14,7 +15,7 @@ class Client {
         // AJOUT
         try {
             // On essayes de récupérer le contenu existant
-            $s_fileData = file_get_contents("ressource/data.json");
+            $s_fileData = file_get_contents($s_file);
              
             if( !$s_fileData || strlen($s_fileData) == 0 ) {
                 // On crée le tableau JSON
