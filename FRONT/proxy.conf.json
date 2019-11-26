@@ -1,0 +1,6 @@
+{ "/api":
+
+{ "target": "http://node18.codenvy.io:34139//TP2_WEB_ANGULAR/backPHP/index.php",
+"secure": false }
+
+}
