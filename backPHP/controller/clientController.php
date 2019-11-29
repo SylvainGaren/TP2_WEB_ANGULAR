@@ -7,14 +7,15 @@ class Client {
 
     function addClient($request,$response,$args) {
 
-        $s_file = 'ressource/data.json';
         $body = $request->getParsedBody(); // Parse le body
-        $id = $body['id']; // Data du formulaire
-        $nom = $body['nom']; // Data du formulaire
-        $surname = $body['surname']; // Data du formulaire
+        
+        $id = $body['x']; // Data du formulaire
+        $nom = $body['x']; // Data du formulaire
+        $surname = $body['x']; // Data du formulaire
         // AJOUT
         try {
             // On essayes de récupérer le contenu existant
+            $s_file = 'ressource/data.json';
             $s_fileData = file_get_contents($s_file);
              
             if( !$s_fileData || strlen($s_fileData) == 0 ) {
@@ -27,22 +28,27 @@ class Client {
              
             // On ajoute le nouvel élement
             array_push( $tableau_pour_json, array(
-                'id' => $id,
-                'nom' => $nom,
-                'surname' => $surname
+                'id' => "mdr",
+                'name' => "no",
+                'surname' => "surname"
             ));
             // On réencode en JSON
             $contenu_json = json_encode($tableau_pour_json);
              
             // On stocke tout le JSON
             file_put_contents($s_file, $contenu_json);
+            echo $contenu_json;
                  
             echo "Vos informations ont été enregistrées\n";
-            echo $contenu_json;
+            $mdr = file_get_contents($s_file);
+
+            echo $mdr;
         }
         catch( Exception $e ) {
             echo "Erreur : ".$e->getMessage();
         }
+       echo "appel fonctionne";
+       return $response->write ("dndsg");
     }
 }
 ?>
