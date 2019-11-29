@@ -3,6 +3,9 @@ import { NgForm, FormArray, FormControl, FormBuilder, FormGroup, Validators } fr
 import { AddRecap } from '../actions/addRecap-action';
 import { Store } from '@ngxs/store';
 import { Router } from '@angular/router';
+import { ApiListService } from '../api-list.service';
+import { UserState } from '../state/user-state';
+import { User } from '../model/user';
 
 @Component({
   selector: 'app-form',
@@ -30,7 +33,7 @@ export class FormComponent implements OnInit {
   Login: string;
   pays: string;
 
-  constructor(private formBuilder: FormBuilder, private store : Store, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private store : Store, private router: Router, private apiService: ApiListService) { }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
@@ -69,10 +72,27 @@ export class FormComponent implements OnInit {
     }
     else {
       alert('SUCCESS');
+      let testSec = JSON.stringify({"nom": this.registerForm.value.Name, "prenom": this.registerForm.value.Prenom});
+      let user: User;
+      user = new User(this.registerForm.value.Name, this.registerForm.value.Prenom);
+      /*user.nom = this.registerForm.value.Name;
+      user.prenom = this.registerForm.value.Prenom;
+      user.adresse = this.registerForm.value.Adresse;
+      user.cp = this.registerForm.value.Cp;
+      user.ville = this.registerForm.value.Ville;
+      user.tel = this.registerForm.value.Tel;
+      user.email = this.registerForm.value.Email;
+      user.civilite = this.registerForm.value.Civilite;
+      user.identifiant = this.registerForm.value.Login;
+      user.pays = this.registerForm.value.pays;*/
+
+      this.apiService.addUser(testSec);
+      //this.apiService.getTest().subscribe(r=>{});
       this.submitted = true;
         
       this.addRecap (this.registerForm.value.Name, this.registerForm.value.Prenom, this.registerForm.value.Adresse, this.registerForm.value.Cp, this.registerForm.value.Ville, this.registerForm.value.Tel, this.registerForm.value.Email, this.registerForm.value.Civilite, this.registerForm.value.Login, this.registerForm.value.pays);
       this.router.navigate(['/auth']);
+      
     }
   }
 

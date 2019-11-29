@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  backendProduct: '/assets/mock/products.json'
+  backendProduct: '/assets/mock/products.json',
+  backendPhp: 'http://node17.codenvy.io:46692/TP2_WEB_ANGULAR/backPHP/index.php/client',
+  backendGet: 'http://node17.codenvy.io:46692/TP2_WEB_ANGULAR/backPHP/index.php/bidon'
 };
 
 /*

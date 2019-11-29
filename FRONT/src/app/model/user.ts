@@ -1,4 +1,4 @@
-export interface User {
+export class User {
     nom: string;
     prenom: string;
     adresse: string;
@@ -9,4 +9,9 @@ export interface User {
     civilite: string;
     identifiant: string;
     pays: string;
+
+    constructor(nom: string, prenom: string) {
+        this.nom = nom;
+        this.prenom = prenom;
+    }
 }
