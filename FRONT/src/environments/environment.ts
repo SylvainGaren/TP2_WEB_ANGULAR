@@ -5,8 +5,9 @@
 export const environment = {
   production: false,
   backendProduct: '/assets/mock/products.json',
-  backendPhp: 'http://node17.codenvy.io:46692/TP2_WEB_ANGULAR/backPHP/index.php/client',
-  backendGet: 'http://node17.codenvy.io:46692/TP2_WEB_ANGULAR/backPHP/index.php/bidon'
+  backendPhp: 'http://node13.codenvy.io:34911/TP2_WEB_ANGULAR/backPHP/index.php/client',
+  backendCheckUser: 'http://node13.codenvy.io:34911/TP2_WEB_ANGULAR/backPHP/index.php/checkUser',
+  backendGet: 'http://node13.codenvy.io:34911/TP2_WEB_ANGULAR/backPHP/index.php/bidon'
 };
 
 /*

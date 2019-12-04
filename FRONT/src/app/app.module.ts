@@ -15,9 +15,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgxsModule } from '@ngxs/store';
 import { UserState } from './state/user-state';
 import { ProductState } from './state/product-state';
+import { LoginFormComponent } from './login-form/login-form.component';
 
 const appRoutes: Routes = [
   { path: 'signin', component: FormComponent },
+  { path: 'login', component: LoginFormComponent },
   { path: 'auth', loadChildren: () => import('./modules/compte-client/compte-client.module').then(m => m.CompteClientModule) },
   { path: 'cat', loadChildren: () => import('./modules/catalogue/catalogue.module').then(m => m.CatalogueModule) },
   { path: 'panier', loadChildren: () => import('./modules/panier/panier.module').then(m => m.PanierModule) },
@@ -29,7 +31,8 @@ const appRoutes: Routes = [
     FormComponent,
     FooterComponent,
     TetiereComponent,
-    PhoneDirectiveDirective
+    PhoneDirectiveDirective,
+    LoginFormComponent
   ],
   imports: [
     BrowserModule,

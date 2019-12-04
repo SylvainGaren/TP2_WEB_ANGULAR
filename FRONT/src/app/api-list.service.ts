@@ -48,4 +48,8 @@ export class ApiListService {
   public getTest() {
     return this.http.get<string>(environment.backendGet);
   }
+
+  public sendUser(data: any) {
+    return this.http.post<JSON>(environment.backendCheckUser, data).subscribe(r=>{});
+  }
 }
