@@ -20,6 +20,10 @@ export class ApiListService {
 
   private obs: Observable<Product[]>;
   productsTab: any;
+  httpOptions = {
+    headers: new HttpHeaders({
+    'Content-Type': 'application/x-www-form-urlencoded'})
+    }
 
   constructor(private http:HttpClient) { }
 
@@ -42,14 +46,15 @@ export class ApiListService {
   }
 
   public addUser(user: any) {
-    return this.http.post<JSON>(environment.backendPhp, user).subscribe(r=>{});
+    return this.http.post<string>(environment.backendPhp, user, httpOptions).subscribe(r=>{});
   }
 
-  public getTest() {
+  public getLogin() {
     return this.http.get<string>(environment.backendGet);
   }
 
   public sendUser(data: any) {
-    return this.http.post<JSON>(environment.backendCheckUser, data).subscribe(r=>{});
+    this.httpOptions.headers.append ("Authorization","Bearer ${this.tokenParse}");
+    return this.http.post<JSON>(environment.backendCheckUser, data, httpOptions).subscribe(r=>{});
   }
 }

@@ -72,7 +72,9 @@ export class FormComponent implements OnInit {
     }
     else {
       alert('SUCCESS');
-      let testSec = JSON.stringify({"nom": this.registerForm.value.Name, "prenom": this.registerForm.value.Prenom});
+      let test = [{"nom": this.registerForm.value.Name, "prenom": this.registerForm.value.Prenom}];
+      console.log(test);
+      let testSec = JSON.stringify({nom: this.registerForm.value.Name, prenom: this.registerForm.value.Prenom});
       let user: User;
       user = new User(this.registerForm.value.Name, this.registerForm.value.Prenom);
       /*user.nom = this.registerForm.value.Name;
@@ -86,7 +88,7 @@ export class FormComponent implements OnInit {
       user.identifiant = this.registerForm.value.Login;
       user.pays = this.registerForm.value.pays;*/
 
-      this.apiService.addUser(testSec);
+      this.apiService.addUser(test);
       //this.apiService.getTest().subscribe(r=>{});
       this.submitted = true;
         

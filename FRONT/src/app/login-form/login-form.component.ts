@@ -20,6 +20,7 @@ export class LoginFormComponent implements OnInit {
       Name: ['', Validators.required],
       Pwd: ['', Validators.required]
     });
+    this.apiService.getLogin();
   }
 
   get form() {
@@ -28,8 +29,8 @@ export class LoginFormComponent implements OnInit {
 
   onSubmit() {
       // envoie des données au serveur pour vérification
-      let userData = JSON.stringify({"name": this.loginForm.value.Name, "password": this.loginForm.value.Pwd});
-      this.apiService.addUser(userData);
+      let userData = [{"name": this.loginForm.value.Name, "password": this.loginForm.value.Pwd}];
+      this.apiService.sendUser(userData);
   }
 
 }
