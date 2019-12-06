@@ -1,8 +1,8 @@
 <?php
 
-header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Allow-Methods: POST, GET, PUT, DELETE, OPTIONS");
-header("Access-Control-Allow-Origin: *");
+//header("Content-Type: application/json; charset=UTF-8");
+//header("Access-Control-Allow-Methods: POST, GET, PUT, DELETE, OPTIONS");
+//header("Access-Control-Allow-Origin: *");
 use \Firebase\JWT\JWT;
 
 ini_set('display_errors', 1);
@@ -34,8 +34,7 @@ $jwt = new \Slim\Middleware\JwtAuthentication([
 function addClient($request,$response,$args) {
 
     $body = $request->getParsedBody(); // Parse le body
-    echo "Body :! " + $body;
-    //$id = $body['nom']; // Data du formulaire
+
     $nom = $body['nom']; // Data du formulaire
     $surname = $body['prenom']; // Data du formulaire
     // AJOUT
@@ -68,7 +67,7 @@ function addClient($request,$response,$args) {
         echo "Erreur : ".$e->getMessage();
     }
 
-   return $response->write ("work done");
+   return $response->write ($contenu_json);
 }
 
 function checkClient($request,$response,$args) {
@@ -111,26 +110,34 @@ function checkClient($request,$response,$args) {
 
 // Utiliser le JWT pour y conserver vos données de session.
 function login ($request, $response, $args) {
-    echo "login";
-    $userid = "emma";
-    $email = "emma@emma.fr";
+    $body = $request->getParsedBody();
+    $userid = $body['name'] ;
+    $pass = $body['password'];
     $issuedAt = time();
     $expirationTime = $issuedAt + 60; // jwt valid for 60 seconds from the issued time
     $payload = array(
-    'userid' => $userid,
-    'iat' => $issuedAt,
-    'exp' => $expirationTime
+        'userid' => $userid,
+        'iat' => $issuedAt,
+        'exp' => $expirationTime
     );
     $token_jwt = JWT::encode($payload,JWT_SECRET, "HS256");
     
     $response = $response->withHeader("Authorization", "Bearer {$token}")->withHeader("Content-Type", "application/json");
     
-    $data = array("name" => "Emma", "age" => 48);
+    $data = array('name' => 'Emma', 'age' => 48,'token' => $token_jwt);
     return $response->withHeader("Content-Type", "application/json")->withJson($data);
 }
 
 
 $app = new \Slim\App;
+
+$app->add(function ($req, $res, $next) {
+    $response = $next($req, $res);
+    return $response
+            ->withHeader('Access-Control-Allow-Origin', '*')
+            ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+            ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+});
 
 // différentes routes
 $app->post('/client', 'addClient');
