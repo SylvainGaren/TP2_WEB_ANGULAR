@@ -14,6 +14,7 @@ require 'vendor/autoload.php';
 // middleware pour le jeton
 const JWT_SECRET = "makey1234567";
 
+// Créer un jeton JWT pour authentifier l’utilisateur dans les échanges avec le BACKEND
 $jwt = new \Slim\Middleware\JwtAuthentication([
 
 "path" => "/api",
@@ -29,6 +30,7 @@ $jwt = new \Slim\Middleware\JwtAuthentication([
 
 ]);
 
+// Récupérer les informations saisies via le formulaire compte client
 function addClient($request,$response,$args) {
 
     $body = $request->getParsedBody(); // Parse le body
@@ -107,6 +109,7 @@ function checkClient($request,$response,$args) {
     }
 }
 
+// Utiliser le JWT pour y conserver vos données de session.
 function login ($request, $response, $args) {
     echo "login";
     $userid = "emma";
@@ -129,6 +132,7 @@ function login ($request, $response, $args) {
 
 $app = new \Slim\App;
 
+// différentes routes
 $app->post('/client', 'addClient');
 $app->post('/checkUser', 'checkClient');
 $app->get('/login', 'login');
