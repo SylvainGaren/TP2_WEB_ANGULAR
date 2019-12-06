@@ -13,10 +13,12 @@ class ComposerStaticInit44f5d0709e098f666e25fdac91415e3c
     public static $prefixLengthsPsr4 = array (
         'S' => 
         array (
+            'Slim\\Middleware\\' => 16,
             'Slim\\' => 5,
         ),
         'P' => 
         array (
+            'Psr\\Log\\' => 8,
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Container\\' => 14,
         ),
@@ -26,14 +28,23 @@ class ComposerStaticInit44f5d0709e098f666e25fdac91415e3c
         ),
         'F' => 
         array (
+            'Firebase\\JWT\\' => 13,
             'FastRoute\\' => 10,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'Slim\\Middleware\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/tuupola/slim-jwt-auth/src',
+        ),
         'Slim\\' => 
         array (
             0 => __DIR__ . '/..' . '/slim/slim/Slim',
+        ),
+        'Psr\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
         ),
         'Psr\\Http\\Message\\' => 
         array (
@@ -46,6 +57,10 @@ class ComposerStaticInit44f5d0709e098f666e25fdac91415e3c
         'Interop\\Container\\' => 
         array (
             0 => __DIR__ . '/..' . '/container-interop/container-interop/src/Interop/Container',
+        ),
+        'Firebase\\JWT\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
         ),
         'FastRoute\\' => 
         array (
