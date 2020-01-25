@@ -1,5 +1,5 @@
 <?php
-class Client {
+class ClientController {
     
     private $_id;
     private $_name;
