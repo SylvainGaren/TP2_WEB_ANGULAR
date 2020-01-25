@@ -4,6 +4,7 @@ import { CompteClientComponentRoutingModule } from './compte-client-routing.modu
 import { HttpClientModule } from '@angular/common/http';
 import { DataRecapComponent } from './data-recap/data-recap.component';
 import { PhoneFormatPipe } from '../../format.pipe';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,9 @@ import { PhoneFormatPipe } from '../../format.pipe';
   imports: [
     CommonModule, 
     CompteClientComponentRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class CompteClientModule { }

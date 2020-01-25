@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, from } from 'rxjs';
 import { Product } from './model/products';
 import { environment } from '../environments/environment';
@@ -27,6 +27,7 @@ export class ApiListService {
 
   constructor(private http:HttpClient) { }
 
+  // retourne tous les produits de la base pour les afficher dans le catalogue
   public getProducts() : Observable<Product[]> {
     return this.http.get<Product[]>(environment.backendProduct);
   }
@@ -46,7 +47,7 @@ export class ApiListService {
   }
 
   public addUser(user: any) {
-    return this.http.post<string>(environment.backendPhp, user, httpOptions).subscribe(r=>{});
+    return this.http.post<User>(environment.backendPhp, user, httpOptions).subscribe(r=>{});
   }
 
   public getLogin() {
@@ -55,6 +56,11 @@ export class ApiListService {
 
   public sendUser(data: any) {
     this.httpOptions.headers.append ("Authorization","Bearer ${this.tokenParse}");
-    return this.http.post<JSON>(environment.backendCheckUser, data, httpOptions).subscribe(r=>{});
+    return this.http.post<User>(environment.backendCheckUser, data, httpOptions);
+  }
+
+  public changePwd(data: any) {
+    this.httpOptions.headers.append ("Authorization","Bearer ${this.tokenParse}");
+    return this.http.post<User>(environment.backendChangePwd, data, httpOptions).subscribe(r=>{console.log(r)});
   }
 }
