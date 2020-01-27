@@ -1,6 +1,6 @@
 { "/api":
     { 
-        "target": "http://node13.codenvy.io:38088",
+        "target": "http://tpmet.local/",
         "secure": false 
     }
 }

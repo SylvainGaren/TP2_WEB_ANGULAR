@@ -72,34 +72,23 @@ export class FormComponent implements OnInit {
     }
     else {
       alert('SUCCESS');
-      let test = [{"nom": this.registerForm.value.Name, "prenom": this.registerForm.value.Prenom}];
+      let test = [{"nom": this.registerForm.value.Name, "prenom": this.registerForm.value.Prenom, "email": this.registerForm.value.Email, "password": this.registerForm.value.Pwd}];
       console.log(test);
       let testSec = JSON.stringify({nom: this.registerForm.value.Name, prenom: this.registerForm.value.Prenom});
       let user: User;
-      user = new User(this.registerForm.value.Name, this.registerForm.value.Prenom);
-      /*user.nom = this.registerForm.value.Name;
-      user.prenom = this.registerForm.value.Prenom;
-      user.adresse = this.registerForm.value.Adresse;
-      user.cp = this.registerForm.value.Cp;
-      user.ville = this.registerForm.value.Ville;
-      user.tel = this.registerForm.value.Tel;
-      user.email = this.registerForm.value.Email;
-      user.civilite = this.registerForm.value.Civilite;
-      user.identifiant = this.registerForm.value.Login;
-      user.pays = this.registerForm.value.pays;*/
+      user = new User(this.registerForm.value.Name, this.registerForm.value.Prenom, this.registerForm.value.Email, this.registerForm.value.Pwd);
 
-      this.apiService.addUser(test);
-      //this.apiService.getTest().subscribe(r=>{});
+      this.apiService.addUser(user);
       this.submitted = true;
         
-      this.addRecap (this.registerForm.value.Name, this.registerForm.value.Prenom, this.registerForm.value.Adresse, this.registerForm.value.Cp, this.registerForm.value.Ville, this.registerForm.value.Tel, this.registerForm.value.Email, this.registerForm.value.Civilite, this.registerForm.value.Login, this.registerForm.value.pays);
+      this.addRecap (this.registerForm.value.Name, this.registerForm.value.Prenom, this.registerForm.value.Adresse, this.registerForm.value.Cp, this.registerForm.value.Ville, this.registerForm.value.Tel, this.registerForm.value.Email, this.registerForm.value.Civilite, this.registerForm.value.Login, this.registerForm.value.pays, this.registerForm.value.Pwd);
       this.router.navigate(['/auth']);
       
     }
   }
 
-  addRecap(nom: string, prenom: string, adresse: string, cp: string, ville: string, tel: string, email: string, civilite: string, identifiant: string, pays: string) { 
-    this.store.dispatch(new AddRecap({ nom, prenom, adresse, cp, ville, tel, email, civilite, identifiant, pays })); 
+  addRecap(nom: string, prenom: string, adresse: string, cp: string, ville: string, tel: string, email: string, civilite: string, identifiant: string, pays: string, password: string) { 
+    this.store.dispatch(new AddRecap({ nom, prenom, adresse, cp, ville, tel, email, civilite, identifiant, pays, password })); 
   }
 
   resetUserForm(userForm: NgForm) {

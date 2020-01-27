@@ -54,3 +54,33 @@
   </table>
   <br>
   <button type="button" class="btn btn-primary" [routerLink]="['/cat']">Go shop</button>
+  <br>
+  <div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <!-- Le formulaire sera lié en action avec un bouton submit qui enclenchera la fonction onFormSubmit en lui envoyant les informations remplies par l'utilisateur -->
+                <form [formGroup]="changePwsForm">
+                    <div class="form-group">
+                        <label>Adresse mail :</label>
+                        <input type="text" formControlName="Name" id="Name" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Ancien mot de passe :</label>
+                        <input type="password" formControlName="Pwd" id="Pwd" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                      <label>Nouveau mot de passe :</label>
+                      <input type="password" formControlName="NewPwd" id="NewPwd" class="form-control">
+                  </div>
+
+                    <div class="form-group">
+                        <br>
+                        <button type="button" class="btn btn-primary" (click)="onSubmit()">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>

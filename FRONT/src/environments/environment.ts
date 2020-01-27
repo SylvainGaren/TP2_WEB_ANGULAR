@@ -4,10 +4,11 @@
 
 export const environment = {
   production: false,
-  backendProduct: '/assets/mock/products.json',
-  backendPhp: 'http://node13.codenvy.io:38088/TP2_WEB_ANGULAR/backPHP/index.php/client',
-  backendCheckUser: 'http://node13.codenvy.io:38088/TP2_WEB_ANGULAR/backPHP/index.php/checkUser',
-  backendGet: 'http://node13.codenvy.io:38088/TP2_WEB_ANGULAR/backPHP/index.php/login'
+  backendProduct: 'http://tpmet.local/index.php/getProducts',
+  backendPhp: 'http://tpmet.local/index.php/client',
+  backendCheckUser: 'http://tpmet.local/index.php/checkUser',
+  backendGet: 'http://tpmet.local/index.php/login',
+  backendChangePwd: 'http://tpmet.local/index.php/changePassword'
 };
 
 /*
