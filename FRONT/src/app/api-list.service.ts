@@ -42,12 +42,11 @@ export class ApiListService {
     this.obs.subscribe((value) => {
       this.productsTab = value;
     });
-    // me print undefined
-    console.log(this.productsTab);
   }
 
   public addUser(user: any) {
-    return this.http.post<User>(environment.backendPhp, user, httpOptions).subscribe(r=>{});
+    this.httpOptions.headers.append ("Authorization","Bearer ${this.tokenParse}");
+    return this.http.post<User>(environment.backendPhp, user, httpOptions);
   }
 
   public getLogin() {
@@ -61,6 +60,11 @@ export class ApiListService {
 
   public changePwd(data: any) {
     this.httpOptions.headers.append ("Authorization","Bearer ${this.tokenParse}");
-    return this.http.post<User>(environment.backendChangePwd, data, httpOptions).subscribe(r=>{console.log(r)});
+    return this.http.post<User>(environment.backendChangePwd, data, httpOptions);
+  }
+
+  public unsubUser(data: any) {
+    this.httpOptions.headers.append ("Authorization","Bearer ${this.tokenParse}");
+    return this.http.post<User>(environment.backendUnsubUser, data, httpOptions);
   }
 }

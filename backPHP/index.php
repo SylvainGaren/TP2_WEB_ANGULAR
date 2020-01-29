@@ -33,6 +33,8 @@ $jwt = new \Slim\Middleware\JwtAuthentication([
 
 ]);
 
+
+// méthode HOME du serveur pour le débuggage, les erreurs de code et de syntaxe s'afficheront ici
 function home($request,$response,$args) {
     global $entityManager;
     /*$client = new Client;   // création du client en faisant appel à la table mappée
@@ -43,7 +45,7 @@ function home($request,$response,$args) {
     echo "CLEINT : ";
     $entityManager->persist($client);
     $entityManager->flush();*/
-    $produitRepository = $entityManager->getRepository('produit');
+    /*$produitRepository = $entityManager->getRepository('produit');
     $count = 1;
     $tableau_pour_json = array();
 
@@ -56,25 +58,32 @@ function home($request,$response,$args) {
             'description' => $prod->getDescription()
         ));
         $count++;
+    }*/
+    // vérification si le client existe déjà en base ou non par son adresse mail
+    $res = "false";
+    $clientRepository = $entityManager->getRepository('client');
+    $client = $clientRepository->findOneBy(array('email'=>""));
+    if ($client) {
+        $res = "true";
     }
 
-    $contenu_json = json_encode($tableau_pour_json);
+    //$contenu_json = json_encode($tableau_pour_json);
     //if (password_verify($password, $client->getPassword())) {
       //  $res = "true";
     //}
-    return $response->write ($contenu_json);
+    return $response->write ($res);
 }
 
 // Récupérer les informations saisies via le formulaire compte client
 function addClient($request,$response,$args) {
     global $entityManager;  // initialisation de l'entity manager
     $body = $request->getParsedBody(); // Parse le body
-    echo $args;
     $nom = $body['nom']; // Data du formulaire
     $surname = $body['prenom']; // Data du formulaire
     $email = $body['email']; // Data du formulaire
     $password = $body['password']; // Data du formulaire
     $hash = password_hash($password, PASSWORD_BCRYPT); // hash du mot de passe
+    $returnValue = "true";
 
     // AJOUT
     try {
@@ -102,20 +111,29 @@ function addClient($request,$response,$args) {
         // On stocke tout le JSON
         file_put_contents($s_file, $contenu_json);
 
+        // vérification si le client existe déjà en base ou non par son adresse mail
+        $clientRepository = $entityManager->getRepository('client');
+        $client = $clientRepository->findOneBy(array('email'=>$email));
+        if ($client) {
+            $returnValue = "false";
+        }
+
         // enregistrement du client dans la base
-        $client = new Client;   // création du client en faisant appel à la table mappée
-        $client->setName($nom);
-        $client->setSurname($surname);
-        $client->setEmail($email);
-        $client->setPassword($hash);
-        $entityManager->persist($client);
-        $entityManager->flush();
+        if ($returnValue == "true") {
+            $client = new Client;   // création du client en faisant appel à la table mappée
+            $client->setName($nom);
+            $client->setSurname($surname);
+            $client->setEmail($email);
+            $client->setPassword($hash);
+            $entityManager->persist($client);
+            $entityManager->flush();
+        }
     }
     catch( Exception $e ) {
         echo "Erreur : ".$e->getMessage();
     }
 
-   return $response->write ($contenu_json);
+   return $response->write ($returnValue);
 }
 
 // vérification du client lors de la connexion
@@ -227,6 +245,36 @@ function changePassword($request,$response,$args) {
    return $response->write ($res);
 }
 
+// désinscription de l'utilisateur en supprimant ses données de la base de données
+function unsubUser($request,$response,$args) {
+    global $entityManager;  // initialisation de l'entity manager
+    $body = $request->getParsedBody(); // Parse le body
+    $email = $body['email']; // Data du formulaire
+    $password = $body['password']; // Data du formulaire
+    $res = "false";
+
+    // AJOUT
+    try {
+        // vérification du mot de passe
+        $clientRepository = $entityManager->getRepository('client');
+        $client = $clientRepository->findOneBy(array('email'=>$email));
+        if (password_verify($password, $client->getPassword())) {
+            $res = "true";
+        }
+
+        // on effectue la mise à jour si l'ancien mot de passe est le bon
+        if ($res == "true") {
+            $entityManager->remove($client);
+            $entityManager->flush();
+        }
+    }
+    catch( Exception $e ) {
+        echo "Erreur : ".$e->getMessage();
+    }
+
+   return $response->write ($res);
+}
+
 
 $app = new \Slim\App([
     'settings' => [
@@ -244,11 +292,14 @@ $app->add(function ($req, $res, $next) {
 
 // différentes routes
 $app->get('/', 'home');
+$app->get('/login', 'login');
+$app->get('/getProducts', 'getProducts');
+
 $app->post('/client', 'addClient');
 $app->post('/checkUser', 'checkClient');
 $app->post('/changePassword', 'changePassword');
-$app->get('/login', 'login');
-$app->get('/getProducts', 'getProducts');
+$app->post('/unsubUser', 'unsubUser');
+
 $app->add($jwt);
 $app->run();
 

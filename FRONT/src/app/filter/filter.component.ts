@@ -19,6 +19,7 @@ export class FilterComponent implements OnInit {
   constructor(private apiService: ApiListService) { }
 
   ngOnInit() {
+    // récupération des produits
     this.products = this.apiService.getProducts();
     this.products.subscribe((value) => {
       this.productTab = value;
@@ -26,6 +27,7 @@ export class FilterComponent implements OnInit {
   }
 
   affiche() {
+    // filtre asynchrone de tous les produits
     this.products.pipe(
       map(data => data.filter(w => w.author == this.search))
     ).subscribe((data: any) => this.res = data);

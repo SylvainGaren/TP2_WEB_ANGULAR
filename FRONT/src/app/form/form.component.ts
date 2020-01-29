@@ -21,6 +21,7 @@ export class FormComponent implements OnInit {
   numeroTel: string;
   valPays: string;
   errorMessage: string = "Quelques erreurs de saisies :";
+  apiCall: any;
 
   Name: string;
   Prenom: string;
@@ -72,17 +73,26 @@ export class FormComponent implements OnInit {
     }
     else {
       alert('SUCCESS');
-      let test = [{"nom": this.registerForm.value.Name, "prenom": this.registerForm.value.Prenom, "email": this.registerForm.value.Email, "password": this.registerForm.value.Pwd}];
-      console.log(test);
-      let testSec = JSON.stringify({nom: this.registerForm.value.Name, prenom: this.registerForm.value.Prenom});
       let user: User;
       user = new User(this.registerForm.value.Name, this.registerForm.value.Prenom, this.registerForm.value.Email, this.registerForm.value.Pwd);
 
-      this.apiService.addUser(user);
+      // appel api pour enregistrer l'utilisateur dans la base
+      this.apiCall = this.apiService.addUser(user);
+      console.log("appel");
+      this.apiCall.subscribe(r=>{
+        console.log("test");
+        console.log(r);
+        if (r == true) {
+          this.router.navigate(['/auth']);
+        }
+        else {
+          this.router.navigate(['/login']);
+        }
+      });
       this.submitted = true;
         
       this.addRecap (this.registerForm.value.Name, this.registerForm.value.Prenom, this.registerForm.value.Adresse, this.registerForm.value.Cp, this.registerForm.value.Ville, this.registerForm.value.Tel, this.registerForm.value.Email, this.registerForm.value.Civilite, this.registerForm.value.Login, this.registerForm.value.pays, this.registerForm.value.Pwd);
-      this.router.navigate(['/auth']);
+      //this.router.navigate(['/auth']);
       
     }
   }

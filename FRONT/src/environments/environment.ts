@@ -8,7 +8,8 @@ export const environment = {
   backendPhp: 'http://tpmet.local/index.php/client',
   backendCheckUser: 'http://tpmet.local/index.php/checkUser',
   backendGet: 'http://tpmet.local/index.php/login',
-  backendChangePwd: 'http://tpmet.local/index.php/changePassword'
+  backendChangePwd: 'http://tpmet.local/index.php/changePassword',
+  backendUnsubUser: 'http://tpmet.local/index.php/unsubUser'
 };
 
 /*

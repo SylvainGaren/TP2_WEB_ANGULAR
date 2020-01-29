@@ -39,13 +39,13 @@ export class LoginFormComponent implements OnInit {
       this.test = this.apiService.sendUser(user);
       this.test.subscribe(r=>{
         console.log(r); 
-        if (r === "true") {
+        if (r == true) {
           this.router.navigate(['/auth']);
         }
         else {
           this.router.navigate(['/login']);
         }
-      })
+      });
   }
 
 }

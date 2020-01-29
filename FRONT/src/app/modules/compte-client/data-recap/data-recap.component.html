@@ -58,6 +58,7 @@
   <div class="jumbotron">
     <div class="container">
         <div class="row">
+          <p>Changez mot de passe :</p>
             <div class="col-md-6 offset-md-3">
                 <!-- Le formulaire sera lié en action avec un bouton submit qui enclenchera la fonction onFormSubmit en lui envoyant les informations remplies par l'utilisateur -->
                 <form [formGroup]="changePwsForm">
@@ -84,3 +85,30 @@
             </div>
         </div>
     </div>
+
+    <!-- formulaire de desinscription -->
+    <div class="jumbotron">
+      <div class="container">
+          <div class="row">
+            <p>Se désinscrire :</p>
+              <div class="col-md-6 offset-md-3">
+                  <!-- Le formulaire sera lié en action avec un bouton submit qui enclenchera la fonction onFormSubmit en lui envoyant les informations remplies par l'utilisateur -->
+                  <form [formGroup]="UnsubForm">
+                      <div class="form-group">
+                          <label>Adresse mail :</label>
+                          <input type="text" formControlName="NameUnsub" id="NameUnsub" class="form-control">
+                      </div>
+  
+                      <div class="form-group">
+                          <label>Mot de passe :</label>
+                          <input type="password" formControlName="PwdUnsub" id="PwdUnsub" class="form-control">
+                      </div>
+  
+                      <div class="form-group">
+                          <br>
+                          <button type="button" class="btn btn-primary" (click)="unsubscription()">Submit</button>
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
