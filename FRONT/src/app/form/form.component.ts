@@ -78,9 +78,7 @@ export class FormComponent implements OnInit {
 
       // appel api pour enregistrer l'utilisateur dans la base
       this.apiCall = this.apiService.addUser(user);
-      console.log("appel");
       this.apiCall.subscribe(r=>{
-        console.log("test");
         console.log(r);
         if (r == true) {
           this.router.navigate(['/auth']);
